@@ -52,16 +52,21 @@ const PDVRaizApp: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [method, setMethod] = useState<'pix' | 'link' | 'cash' | null>(null);
   const [currentSaleId, setCurrentSaleId] = useState<string | null>(null);
+  const [storeId, setStoreId] = useState<string | null>(null);
 
-  // Auto-create store on mount if needed
+  // Auto-create store on mount if needed and cache ID
   useEffect(() => {
     const ensureStore = async () => {
       const { data: stores } = await supabase
         .from('stores')
         .select('id')
         .limit(1);
-      if (!stores || stores.length === 0) {
+
+      if (stores && stores.length > 0) {
+        setStoreId(stores[0].id);
+      } else {
         console.log('No store found. Creating default store...');
+        // Logic to create store is in handleLogin, maybe move here or keep simple
       }
     };
     ensureStore();
@@ -73,6 +78,7 @@ const PDVRaizApp: React.FC = () => {
       .from('stores')
       .select('id')
       .limit(1);
+
     if (!stores || stores.length === 0) {
       const { data: user } = await supabase
         .from('users')
@@ -85,13 +91,21 @@ const PDVRaizApp: React.FC = () => {
         .single();
 
       if (user) {
-        await supabase.from('stores').insert({
-          user_id: user.id,
-          name: 'Minha Loja',
-          address: {},
-          business_hours: {},
-        });
+        const { data: newStore } = await supabase
+          .from('stores')
+          .insert({
+            user_id: user.id,
+            name: 'Minha Loja',
+            address: {},
+            business_hours: {},
+          })
+          .select()
+          .single();
+
+        if (newStore) setStoreId(newStore.id);
       }
+    } else {
+      setStoreId(stores[0].id);
     }
     setView('dashboard');
   };
@@ -103,7 +117,16 @@ const PDVRaizApp: React.FC = () => {
   const handleAdd = (product: Product) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
-      if (!existing) return [...prev, { product, quantity: 1 }];
+      if (!existing) {
+        if (product.stock < 1) return prev; // Should not happen due to filter, but safe
+        return [...prev, { product, quantity: 1 }];
+      }
+
+      if (existing.quantity >= product.stock) {
+        // Optional: Show toast/alert here
+        return prev;
+      }
+
       return prev.map((i) =>
         i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
       );
@@ -131,38 +154,28 @@ const PDVRaizApp: React.FC = () => {
   const handleCreateSale = async (selectedMethod: 'pix' | 'link' | 'cash') => {
     setMethod(selectedMethod);
 
-    const { data: stores } = await supabase
-      .from('stores')
-      .select('id')
-      .limit(1);
-    const storeId = stores?.[0]?.id;
+    // Optimistic UI: Show loading state or transition immediately if possible
+    // For now, we just want the network request to be fast.
 
-    if (!storeId) {
-      // Error will be handled by dialog context if needed
-      console.error('Nenhuma loja encontrada');
-      return;
+    let effectiveStoreId = storeId;
+
+    if (!effectiveStoreId) {
+      console.error('Nenhuma loja encontrada (ID não carregado)');
+      // Try to fetch one last time
+      const { data: stores } = await supabase
+        .from('stores')
+        .select('id')
+        .limit(1);
+      if (stores?.[0]?.id) {
+        effectiveStoreId = stores[0].id;
+        setStoreId(effectiveStoreId);
+      } else {
+        return;
+      }
     }
 
-    const { data: sale, error: saleError } = await supabase
-      .from('sales')
-      .insert({
-        store_id: storeId,
-        total: total,
-        status: 'PENDING',
-      })
-      .select()
-      .single();
-
-    if (saleError || !sale) {
-      console.error('Error creating sale:', saleError);
-      // Error will be handled by dialog context if needed
-      return;
-    }
-
-    setCurrentSaleId(sale.id);
-
-    const saleItems = cart.map((item) => ({
-      sale_id: sale.id,
+    // Prepare items for RPC
+    const rpcItems = cart.map((item) => ({
       product_id: item.product.id,
       quantity: item.quantity,
       unit_price: item.product.price,
@@ -170,41 +183,35 @@ const PDVRaizApp: React.FC = () => {
       product_name: item.product.name,
     }));
 
-    const { error: itemsError } = await supabase
-      .from('sale_items')
-      .insert(saleItems);
+    const dbMethod =
+      selectedMethod === 'cash'
+        ? 'CASH'
+        : selectedMethod === 'pix'
+          ? 'PIX'
+          : 'CREDIT_CARD';
 
-    if (itemsError) {
-      console.error('Error creating items:', itemsError);
-      // Error will be handled by dialog context if needed
+    const { data: result, error } = await supabase.rpc(
+      'create_sale_transaction',
+      {
+        p_store_id: effectiveStoreId,
+        p_total: total,
+        p_items: rpcItems,
+        p_payment_method: dbMethod,
+      }
+    );
+
+    if (error) {
+      console.error('Error creating sale transaction:', error);
+      alert('Erro ao criar venda: ' + error.message);
       return;
     }
 
-    if (selectedMethod === 'cash') {
-      const { data: payment } = await supabase
-        .from('payments')
-        .insert({
-          sale_id: sale.id,
-          amount: total,
-          method: 'CASH',
-          status: 'PAID',
-        })
-        .select()
-        .single();
+    const { sale_id, status } = result as any;
+    setCurrentSaleId(sale_id);
 
-      if (payment) {
-        await supabase.rpc('process_payment', { payment_uuid: payment.id });
-      }
-
+    if (status === 'PAID') {
       setView('payment-confirmation');
     } else {
-      await supabase.from('payments').insert({
-        sale_id: sale.id,
-        amount: total,
-        method: selectedMethod === 'pix' ? 'PIX' : 'CREDIT_CARD',
-        status: 'PENDING',
-      });
-
       setView('payment-waiting');
     }
   };
@@ -256,7 +263,9 @@ const PDVRaizApp: React.FC = () => {
         <PaymentWaitingScreen
           total={total}
           method={method}
+          saleId={currentSaleId}
           onBack={() => setView('payment-method')}
+          onPaymentConfirmed={() => setView('payment-confirmation')}
         />
       )}
 

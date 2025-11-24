@@ -13,9 +13,9 @@ async function run() {
   console.log('--- Debugging Product Creation ---');
 
   // Simulate Frontend State
-  const name = "Debug Shirt";
-  const priceInput = "10"; // User types 10
-  const stockInput = "10"; // User types 10
+  const name = 'Debug Shirt';
+  const priceInput = '10'; // User types 10
+  const stockInput = '10'; // User types 10
 
   // Simulate Frontend Logic
   const price = parseFloat(priceInput.replace(',', '.'));
@@ -41,7 +41,7 @@ async function run() {
       name,
       price,
       stock,
-      is_active: true
+      is_active: true,
     })
     .select()
     .single();

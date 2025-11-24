@@ -20,9 +20,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-gray-50 text-gray-900 antialiased`}
       >
-        <DialogProvider>
-          {children}
-        </DialogProvider>
+        <DialogProvider>{children}</DialogProvider>
       </body>
     </html>
   );

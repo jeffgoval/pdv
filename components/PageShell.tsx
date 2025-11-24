@@ -1,7 +1,7 @@
-import React from "react";
-import { BottomNav } from "./BottomNav";
+import React from 'react';
+import { BottomNav } from './BottomNav';
 
-type NavTab = "dashboard" | "products" | "profile";
+type NavTab = 'dashboard' | 'products' | 'profile';
 
 interface PageShellProps {
   title: string;
@@ -34,7 +34,9 @@ export const PageShell: React.FC<PageShellProps> = ({
           <h1 className="text-xl font-bold text-gray-900">{title}</h1>
         </div>
       </header>
-      <main className={`flex-1 px-6 pb-6 pt-6 flex flex-col gap-6 overflow-y-auto bg-gray-50 ${activeTab ? 'mb-20' : ''}`}>
+      <main
+        className={`flex-1 px-6 pb-6 pt-6 flex flex-col gap-6 overflow-y-auto bg-gray-50 ${activeTab ? 'mb-20' : ''}`}
+      >
         {children}
       </main>
       {activeTab && onNavigate && (

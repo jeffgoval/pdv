@@ -71,13 +71,19 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
           {loading ? (
             <div className="p-8 text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-200 border-t-blue-600 mb-3"></div>
-              <p className="text-sm text-gray-600 font-medium">Carregando produtos...</p>
+              <p className="text-sm text-gray-600 font-medium">
+                Carregando produtos...
+              </p>
             </div>
           ) : products.length === 0 ? (
             <div className="p-8 text-center">
               <span className="text-4xl mb-3 block">📦</span>
-              <p className="text-sm text-gray-600 font-medium">Nenhum produto disponível.</p>
-              <p className="text-xs text-gray-500 mt-1">Adicione produtos na tela de produtos</p>
+              <p className="text-sm text-gray-600 font-medium">
+                Nenhum produto disponível.
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Adicione produtos na tela de produtos
+              </p>
             </div>
           ) : (
             products.map((p) => {
@@ -88,7 +94,9 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
                   className="flex items-center justify-between px-5 py-4"
                 >
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm font-semibold text-gray-900">{p.name}</span>
+                    <span className="text-sm font-semibold text-gray-900">
+                      {p.name}
+                    </span>
                     <span className="text-xs text-gray-600 font-medium">
                       {formatCurrency(p.price)} · {p.stock} em estoque
                     </span>

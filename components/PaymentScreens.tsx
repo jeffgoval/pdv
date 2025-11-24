@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PageShell } from './PageShell';
+import { supabase } from '@/lib/supabase';
+import { useEffect } from 'react';
 
 interface PaymentMethodScreenProps {
   total: number;
@@ -25,7 +27,9 @@ export const PaymentMethodScreen: React.FC<PaymentMethodScreenProps> = ({
       <div className="flex flex-col gap-4">
         <div className="rounded-2xl border-2 border-blue-200 bg-blue-50 px-5 py-4 flex items-center justify-between shadow-sm">
           <div className="flex flex-col gap-1">
-            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">Total da venda</span>
+            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
+              Total da venda
+            </span>
             <span className="text-2xl font-bold text-gray-900">
               {formatCurrency(total)}
             </span>
@@ -44,13 +48,17 @@ export const PaymentMethodScreen: React.FC<PaymentMethodScreenProps> = ({
                 ⬢
               </span>
               <div className="flex flex-col items-start">
-                <span className="text-sm font-bold text-gray-900">PIX imediato</span>
+                <span className="text-sm font-bold text-gray-900">
+                  PIX imediato
+                </span>
                 <span className="text-xs text-gray-600 font-medium">
                   QR dinâmico via Asaas
                 </span>
               </div>
             </div>
-            <span className="text-xs text-emerald-600 font-bold bg-emerald-100 px-2 py-1 rounded-full">Recomendado</span>
+            <span className="text-xs text-emerald-600 font-bold bg-emerald-100 px-2 py-1 rounded-full">
+              Recomendado
+            </span>
           </motion.button>
 
           <motion.button
@@ -64,7 +72,9 @@ export const PaymentMethodScreen: React.FC<PaymentMethodScreenProps> = ({
                 🔗
               </span>
               <div className="flex flex-col items-start">
-                <span className="text-sm font-bold text-gray-900">Link de pagamento</span>
+                <span className="text-sm font-bold text-gray-900">
+                  Link de pagamento
+                </span>
                 <span className="text-xs text-gray-600 font-medium">
                   Cartão ou PIX pelo celular do cliente
                 </span>
@@ -83,7 +93,9 @@ export const PaymentMethodScreen: React.FC<PaymentMethodScreenProps> = ({
                 💵
               </span>
               <div className="flex flex-col items-start">
-                <span className="text-sm font-bold text-gray-900">Dinheiro</span>
+                <span className="text-sm font-bold text-gray-900">
+                  Dinheiro
+                </span>
                 <span className="text-xs text-gray-600 font-medium">
                   Você confirma manualmente o recebimento
                 </span>
@@ -99,14 +111,59 @@ export const PaymentMethodScreen: React.FC<PaymentMethodScreenProps> = ({
 interface PaymentWaitingScreenProps {
   total: number;
   method: string;
+  saleId: string | null;
   onBack: () => void;
+  onPaymentConfirmed: () => void;
 }
 
 export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
   total,
   method,
+  saleId,
   onBack,
+  onPaymentConfirmed,
 }) => {
+  useEffect(() => {
+    if (!saleId) return;
+
+    // 1. Realtime Subscription
+    const channel = supabase
+      .channel('payment-status')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'payments',
+          filter: `sale_id=eq.${saleId}`,
+        },
+        (payload) => {
+          const newStatus = payload.new.status;
+          if (newStatus === 'PAID') {
+            onPaymentConfirmed();
+          }
+        }
+      )
+      .subscribe();
+
+    // 2. Polling Fallback (every 3s)
+    const interval = setInterval(async () => {
+      const { data } = await supabase
+        .from('payments')
+        .select('status')
+        .eq('sale_id', saleId)
+        .single();
+
+      if (data?.status === 'PAID') {
+        onPaymentConfirmed();
+      }
+    }, 3000);
+
+    return () => {
+      supabase.removeChannel(channel);
+      clearInterval(interval);
+    };
+  }, [saleId, onPaymentConfirmed]);
   const formatCurrency = (value: number) =>
     value.toLocaleString('pt-BR', {
       style: 'currency',
@@ -141,14 +198,18 @@ export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
 
         <div className="w-full rounded-2xl border-2 border-gray-200 bg-white px-5 py-4 flex flex-col gap-3 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">Total</span>
+            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
+              Total
+            </span>
             <span className="text-lg font-bold text-gray-900">
               {formatCurrency(total)}
             </span>
           </div>
           <div className="h-px bg-gray-200" />
           <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">Método</span>
+            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
+              Método
+            </span>
             <span className="text-xs text-gray-900 font-bold uppercase">
               {method === 'pix'
                 ? 'PIX'
@@ -160,19 +221,27 @@ export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
         </div>
 
         <div className="w-full flex flex-col gap-3">
-          <button 
+          <button
             className="w-full rounded-2xl border-2 border-gray-200 bg-white px-5 py-3 flex items-center justify-between hover:border-blue-300 hover:shadow-sm transition-all"
             aria-label="Copiar código PIX"
           >
-            <span className="text-sm font-bold text-gray-900">Copiar código PIX</span>
-            <span className="text-xs text-gray-500 font-medium">copia e cola</span>
+            <span className="text-sm font-bold text-gray-900">
+              Copiar código PIX
+            </span>
+            <span className="text-xs text-gray-500 font-medium">
+              copia e cola
+            </span>
           </button>
-          <button 
+          <button
             className="w-full rounded-2xl border-2 border-gray-200 bg-white px-5 py-3 flex items-center justify-between hover:border-blue-300 hover:shadow-sm transition-all"
             aria-label="Enviar link pelo WhatsApp"
           >
-            <span className="text-sm font-bold text-gray-900">Enviar link pelo WhatsApp</span>
-            <span className="text-xs text-gray-500 font-medium">compartilhar</span>
+            <span className="text-sm font-bold text-gray-900">
+              Enviar link pelo WhatsApp
+            </span>
+            <span className="text-xs text-gray-500 font-medium">
+              compartilhar
+            </span>
           </button>
         </div>
       </div>
@@ -216,7 +285,7 @@ export const PaymentConfirmationScreen: React.FC<
         </div>
 
         <div className="w-full flex flex-col gap-3 mt-2">
-          <button 
+          <button
             className="w-full rounded-2xl bg-emerald-500 text-white px-5 py-4 font-bold text-sm flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors shadow-sm"
             aria-label="Enviar recibo"
           >

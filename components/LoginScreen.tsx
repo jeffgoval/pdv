@@ -31,9 +31,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             </div>
             <span className="text-sm text-gray-900 font-bold">PDV</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Bem-vindo
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">Bem-vindo</h1>
           <p className="text-base text-gray-800 max-w-sm leading-relaxed font-medium">
             Sistema de ponto de venda simples e rápido para o seu negócio.
           </p>
@@ -62,7 +60,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           )}
         </button>
         <p className="text-xs text-gray-700 text-center px-4 leading-relaxed font-semibold">
-          Ao continuar, você aceita nossos termos de serviço e política de privacidade.
+          Ao continuar, você aceita nossos termos de serviço e política de
+          privacidade.
         </p>
       </motion.div>
     </div>

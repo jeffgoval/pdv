@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { PageShell } from "./PageShell";
-import { supabase } from "@/lib/supabase";
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { PageShell } from './PageShell';
+import { supabase } from '@/lib/supabase';
 
-type NavTab = "dashboard" | "products" | "profile";
+type NavTab = 'dashboard' | 'products' | 'profile';
 
 interface DashboardScreenProps {
   onNewSale: () => void;
@@ -24,7 +24,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
     todaySales: 0,
     todayRevenue: 0,
     pixRevenue: 0,
-    pixCount: 0
+    pixCount: 0,
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           todaySales: data.today_sales || 0,
           todayRevenue: data.today_revenue || 0,
           pixRevenue: 0,
-          pixCount: 0
+          pixCount: 0,
         });
       }
     };
@@ -48,17 +48,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   }, []);
 
   const formatCurrency = (value: number) =>
-    value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
+    value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
       minimumFractionDigits: 2,
     });
 
   return (
-    <PageShell 
-        title="Resumo do dia" 
-        activeTab={activeTab} 
-        onNavigate={onNavigate}
+    <PageShell
+      title="Resumo do dia"
+      activeTab={activeTab}
+      onNavigate={onNavigate}
     >
       <section className="flex flex-col gap-4">
         <motion.button
@@ -76,24 +76,38 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             layout
             className="rounded-2xl border-2 border-gray-200 bg-white p-5 flex flex-col gap-2 shadow-sm"
           >
-            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">Vendas de hoje</span>
-            <span className="text-2xl font-bold text-gray-900">{formatCurrency(metrics.todayRevenue)}</span>
-            <span className="text-sm text-blue-600 font-bold">{metrics.todaySales} vendas</span>
+            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
+              Vendas de hoje
+            </span>
+            <span className="text-2xl font-bold text-gray-900">
+              {formatCurrency(metrics.todayRevenue)}
+            </span>
+            <span className="text-sm text-blue-600 font-bold">
+              {metrics.todaySales} vendas
+            </span>
           </motion.div>
           <motion.div
             layout
             className="rounded-2xl border-2 border-gray-200 bg-white p-5 flex flex-col gap-2 shadow-sm"
           >
-            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">Recebido via PIX</span>
-            <span className="text-2xl font-bold text-gray-900">{formatCurrency(metrics.pixRevenue)}</span>
-            <span className="text-sm text-gray-600 font-bold">{metrics.pixCount} pendentes</span>
+            <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
+              Recebido via PIX
+            </span>
+            <span className="text-2xl font-bold text-gray-900">
+              {formatCurrency(metrics.pixRevenue)}
+            </span>
+            <span className="text-sm text-gray-600 font-bold">
+              {metrics.pixCount} pendentes
+            </span>
           </motion.div>
         </div>
       </section>
 
       <section className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold text-gray-700">Atalhos rápidos</span>
+          <span className="text-sm font-semibold text-gray-700">
+            Atalhos rápidos
+          </span>
         </div>
         <div className="grid grid-cols-3 gap-3">
           <button

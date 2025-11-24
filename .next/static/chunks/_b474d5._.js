@@ -12,7 +12,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$mo
 "__TURBOPACK__ecmascript__hoisting__location__";
 ;
 ;
-const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText = "OK", cancelText = "Cancelar" })=>{
+const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText = 'OK', cancelText = 'Cancelar' })=>{
     if (!isOpen) return null;
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
         children: isOpen && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
@@ -64,12 +64,12 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                             className: "p-6 flex flex-col gap-4 text-center",
                             children: [
                                 /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-                                    className: `mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl mb-1 ${type === "error" ? "bg-red-100 border-red-200" : type === "success" ? "bg-emerald-100 border-emerald-200" : type === "alert" ? "bg-blue-100 border-blue-200" : "bg-gray-100 border-gray-200"}`,
+                                    className: `mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl mb-1 ${type === 'error' ? 'bg-red-100 border-red-200' : type === 'success' ? 'bg-emerald-100 border-emerald-200' : type === 'alert' ? 'bg-blue-100 border-blue-200' : 'bg-gray-100 border-gray-200'}`,
                                     children: [
-                                        type === "error" && "🚨",
-                                        type === "success" && "✅",
-                                        type === "alert" && "ℹ️",
-                                        type === "confirm" && "🤔"
+                                        type === 'error' && '🚨',
+                                        type === 'success' && '✅',
+                                        type === 'alert' && 'ℹ️',
+                                        type === 'confirm' && '🤔'
                                     ]
                                 }, void 0, true, {
                                     fileName: "<[project]/components/ui/Dialog.tsx>",
@@ -82,7 +82,7 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                                     children: title
                                 }, void 0, false, {
                                     fileName: "<[project]/components/ui/Dialog.tsx>",
-                                    lineNumber: 68,
+                                    lineNumber: 73,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("p", {
@@ -91,7 +91,7 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                                     children: message
                                 }, void 0, false, {
                                     fileName: "<[project]/components/ui/Dialog.tsx>",
-                                    lineNumber: 69,
+                                    lineNumber: 76,
                                     columnNumber: 15
                                 }, this)
                             ]
@@ -102,7 +102,7 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                         }, this),
                         /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                             className: "flex border-t-2 border-gray-200 bg-gray-50",
-                            children: type === "confirm" ? /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                            children: type === 'confirm' ? /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                 children: [
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
                                         onClick: onCancel,
@@ -111,14 +111,14 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                                         children: cancelText
                                     }, void 0, false, {
                                         fileName: "<[project]/components/ui/Dialog.tsx>",
-                                        lineNumber: 78,
+                                        lineNumber: 88,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                                         className: "w-px bg-gray-300"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/ui/Dialog.tsx>",
-                                        lineNumber: 85,
+                                        lineNumber: 95,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
@@ -128,7 +128,7 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                                         children: confirmText
                                     }, void 0, false, {
                                         fileName: "<[project]/components/ui/Dialog.tsx>",
-                                        lineNumber: 86,
+                                        lineNumber: 96,
                                         columnNumber: 19
                                     }, this)
                                 ]
@@ -139,12 +139,12 @@ const Dialog = ({ isOpen, type, title, message, onConfirm, onCancel, confirmText
                                 children: confirmText
                             }, void 0, false, {
                                 fileName: "<[project]/components/ui/Dialog.tsx>",
-                                lineNumber: 95,
+                                lineNumber: 105,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "<[project]/components/ui/Dialog.tsx>",
-                            lineNumber: 75,
+                            lineNumber: 85,
                             columnNumber: 13
                         }, this)
                     ]
@@ -183,7 +183,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$Dialog$2
 "__TURBOPACK__ecmascript__hoisting__location__";
 ;
 var _s = __turbopack_refresh__.signature(), _s1 = __turbopack_refresh__.signature();
-"use client";
+'use client';
 ;
 ;
 const DialogContext = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"](undefined);
@@ -192,9 +192,9 @@ const DialogProvider = ({ children })=>{
     const [dialogState, setDialogState] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"]({
         isOpen: false,
         options: {
-            title: "",
-            message: "",
-            type: "alert"
+            title: '',
+            message: '',
+            type: 'alert'
         },
         resolve: ()=>{}
     });
@@ -213,43 +213,43 @@ const DialogProvider = ({ children })=>{
             });
         });
     }, []);
-    const showAlert = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = "Aviso")=>{
+    const showAlert = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = 'Aviso')=>{
         await showDialog({
             title,
             message,
-            type: "alert",
-            confirmText: "OK"
+            type: 'alert',
+            confirmText: 'OK'
         });
     }, [
         showDialog
     ]);
-    const showError = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = "Erro")=>{
+    const showError = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = 'Erro')=>{
         await showDialog({
             title,
             message,
-            type: "error",
-            confirmText: "Entendi"
+            type: 'error',
+            confirmText: 'Entendi'
         });
     }, [
         showDialog
     ]);
-    const showSuccess = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = "Sucesso")=>{
+    const showSuccess = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = 'Sucesso')=>{
         await showDialog({
             title,
             message,
-            type: "success",
-            confirmText: "OK"
+            type: 'success',
+            confirmText: 'OK'
         });
     }, [
         showDialog
     ]);
-    const showConfirm = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = "Confirmação")=>{
+    const showConfirm = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](async (message, title = 'Confirmação')=>{
         const result = await showDialog({
             title,
             message,
-            type: "confirm",
-            confirmText: "Sim",
-            cancelText: "Não"
+            type: 'confirm',
+            confirmText: 'Sim',
+            cancelText: 'Não'
         });
         return result === true;
     }, [
@@ -274,7 +274,7 @@ const DialogProvider = ({ children })=>{
             children,
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$Dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
                 isOpen: dialogState.isOpen,
-                type: dialogState.options.type || "alert",
+                type: dialogState.options.type || 'alert',
                 title: dialogState.options.title,
                 message: dialogState.options.message,
                 confirmText: dialogState.options.confirmText,
@@ -283,23 +283,23 @@ const DialogProvider = ({ children })=>{
                 onCancel: handleCancel
             }, void 0, false, {
                 fileName: "<[project]/contexts/DialogContext.tsx>",
-                lineNumber: 103,
+                lineNumber: 105,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "<[project]/contexts/DialogContext.tsx>",
-        lineNumber: 99,
+        lineNumber: 101,
         columnNumber: 5
     }, this);
 };
-_s(DialogProvider, "RR7+zYxsOqf0m+hYQj9rTe8odWc=");
+_s(DialogProvider, "qwzyjGTwSBDyV+1gx2KpBkB/JiA=");
 _c = DialogProvider;
 const useDialog = ()=>{
     _s1();
     const context = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"](DialogContext);
     if (!context) {
-        throw new Error("useDialog must be used within a DialogProvider");
+        throw new Error('useDialog must be used within a DialogProvider');
     }
     return context;
 };

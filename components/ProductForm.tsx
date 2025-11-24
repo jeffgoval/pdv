@@ -107,7 +107,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-gray-900">Preço (R$)</label>
+              <label className="text-sm font-bold text-gray-900">
+                Preço (R$)
+              </label>
               <input
                 type="number"
                 step="0.01"

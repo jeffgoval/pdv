@@ -343,7 +343,7 @@ body {
   background-color: rgb(249 250 251/ var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
   color: rgb(17 24 39/ var(--tw-text-opacity, 1));
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
 }
 .fixed {
   position: fixed;
@@ -430,6 +430,9 @@ body {
 }
 .inline-flex {
   display: inline-flex;
+}
+.table {
+  display: table;
 }
 .grid {
   display: grid;
