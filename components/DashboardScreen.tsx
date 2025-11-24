@@ -27,30 +27,43 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
     pixCount: 0,
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchMetrics = async () => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const todayISO = today.toISOString();
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayISO = today.toISOString();
 
-      // Get today's sales
-      const { data: sales, error: salesError } = await supabase
-        .from('sales')
-        .select('total, status')
-        .gte('created_at', todayISO);
+        // Get today's sales
+        const { data: sales, error: salesError } = await supabase
+          .from('sales')
+          .select('total, status')
+          .gte('created_at', todayISO);
 
-      if (sales) {
-        const todaySales = sales.filter((s) => s.status === 'PAID').length;
-        const todayRevenue = sales
-          .filter((s) => s.status === 'PAID')
-          .reduce((sum, s) => sum + (s.total || 0), 0);
+        if (salesError) {
+          console.error('Error fetching sales:', salesError);
+          return;
+        }
 
-        setMetrics({
-          todaySales,
-          todayRevenue,
-          pixRevenue: 0,
-          pixCount: 0,
-        });
+        if (sales) {
+          const todaySales = sales.filter((s) => s.status === 'PAID').length;
+          const todayRevenue = sales
+            .filter((s) => s.status === 'PAID')
+            .reduce((sum, s) => sum + (s.total || 0), 0);
+
+          setMetrics({
+            todaySales,
+            todayRevenue,
+            pixRevenue: 0,
+            pixCount: 0,
+          });
+        }
+      } catch (error) {
+        console.error('Error in fetchMetrics:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
