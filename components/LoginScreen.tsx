@@ -51,7 +51,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 text-3xl text-white shadow-lg">
               💰
             </div>
-            <h1 className="mb-2 text-2xl font-bold text-gray-900">PDV Raiz</h1>
+            <h1 className="mb-2 text-2xl font-bold text-gray-900">PDV</h1>
             <p className="text-sm text-gray-600">
               {isSignUp ? 'Criar nova conta' : 'Entre na sua conta'}
             </p>
