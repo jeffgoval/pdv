@@ -38,9 +38,7 @@ const PDVRaizApp: React.FC = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gray-100 overflow-hidden">
-      {view === 'login' && (
-        <LoginScreen onLogin={signIn} onSignUp={signUp} />
-      )}
+      {view === 'login' && <LoginScreen onLogin={signIn} onSignUp={signUp} />}
 
       {view === 'dashboard' && (
         <DashboardScreen

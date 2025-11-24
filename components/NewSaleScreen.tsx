@@ -36,10 +36,6 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
 
   const { showError } = useDialog();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -71,6 +67,11 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
     }
   };
 
+  useEffect(() => {
+    fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const total = cart.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
     0
@@ -85,8 +86,8 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
 
   return (
     <PageShell title="Nova venda" onBack={onBack}>
-      <div className="flex flex-col gap-4 relative flex-1">
-        <div className="rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden">
+      <div className="flex flex-col gap-4 flex-1 min-h-0">
+        <div className="rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden flex-1 overflow-y-auto">
           {loading ? (
             <div className="p-8 text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-200 border-t-blue-600 mb-3"></div>
@@ -160,7 +161,7 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 60, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-            className="absolute inset-x-0 bottom-0 px-4 pb-4"
+            className="sticky bottom-0 left-0 right-0 mt-auto"
           >
             <div className="rounded-2xl border-2 border-blue-200 bg-white backdrop-blur shadow-lg px-5 py-4 flex items-center justify-between">
               <div className="flex flex-col gap-1">

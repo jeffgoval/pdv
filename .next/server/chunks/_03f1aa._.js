@@ -1351,9 +1351,9 @@ const NewSaleScreen = ({ cart, onAdd, onRemove, onFinalize, onBack })=>{
         onBack: onBack,
         children: [
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-                className: "flex flex-col gap-4 relative flex-1",
+                className: "flex flex-col gap-4 flex-1 min-h-0",
                 children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-                    className: "rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden",
+                    className: "rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden flex-1 overflow-y-auto",
                     children: loading ? /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                         className: "p-8 text-center",
                         children: [
@@ -1525,7 +1525,7 @@ const NewSaleScreen = ({ cart, onAdd, onRemove, onFinalize, onBack })=>{
                         stiffness: 380,
                         damping: 32
                     },
-                    className: "absolute inset-x-0 bottom-0 px-4 pb-4",
+                    className: "sticky bottom-0 left-0 right-0 mt-auto",
                     children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                         className: "rounded-2xl border-2 border-blue-200 bg-white backdrop-blur shadow-lg px-5 py-4 flex items-center justify-between",
                         children: [
@@ -2759,6 +2759,218 @@ function useAuth() {
 }
 
 })()),
+"[project]/contexts/AppContext.tsx [app-ssr] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__ }) => (() => {
+"use strict";
+
+__turbopack_esm__({
+    "AppProvider": ()=>AppProvider,
+    "useApp": ()=>useApp
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/lib/supabase.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/contexts/AuthContext.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$DialogContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/contexts/DialogContext.tsx [app-ssr] (ecmascript)");
+"__TURBOPACK__ecmascript__hoisting__location__";
+'use client';
+;
+;
+;
+;
+;
+const AppContext = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createContext"](undefined);
+const AppProvider = ({ children })=>{
+    const { user, signOut } = __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAuth"]();
+    const { showError } = __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$DialogContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDialog"]();
+    // View state
+    const [view, setView] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"]('login');
+    // Cart state
+    const [cart, setCart] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"]([]);
+    // Payment state
+    const [paymentMethod, setPaymentMethod] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](null);
+    const [currentSaleId, setCurrentSaleId] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](null);
+    // Store state
+    const [storeId, setStoreId] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](null);
+    // Load user's store when authenticated
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"](()=>{
+        const loadUserStore = async ()=>{
+            if (!user) {
+                setStoreId(null);
+                setView('login');
+                return;
+            }
+            try {
+                // Get or create store for this user
+                const { data: stores, error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from('stores').select('id').eq('user_id', user.id).limit(1);
+                if (error) {
+                    await showError('Erro ao carregar informações da loja.', 'Erro de autenticação');
+                    return;
+                }
+                if (stores && stores.length > 0) {
+                    setStoreId(stores[0].id);
+                    setView('dashboard');
+                } else {
+                    // Create store for new user
+                    const { data: newStore, error: createError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from('stores').insert({
+                        user_id: user.id,
+                        name: 'Minha Loja',
+                        address: {},
+                        business_hours: {}
+                    }).select().single();
+                    if (createError) {
+                        await showError('Erro ao criar loja. Tente fazer login novamente.', 'Erro');
+                        return;
+                    }
+                    if (newStore) {
+                        setStoreId(newStore.id);
+                        setView('dashboard');
+                    }
+                }
+            } catch (error) {
+                await showError(`Erro inesperado: ${error?.message || 'Tente novamente.'}`, 'Erro');
+            }
+        };
+        loadUserStore();
+    }, [
+        user,
+        showError
+    ]);
+    // Navigate to tab
+    const navigateToTab = (tab)=>{
+        setView(tab);
+    };
+    // Cart actions
+    const addToCart = (product)=>{
+        setCart((prev)=>{
+            const existing = prev.find((i)=>i.product.id === product.id);
+            if (!existing) {
+                if (product.stock < 1) return prev;
+                return [
+                    ...prev,
+                    {
+                        product,
+                        quantity: 1
+                    }
+                ];
+            }
+            if (existing.quantity >= product.stock) {
+                return prev;
+            }
+            return prev.map((i)=>i.product.id === product.id ? {
+                    ...i,
+                    quantity: i.quantity + 1
+                } : i);
+        });
+    };
+    const removeFromCart = (product)=>{
+        setCart((prev)=>{
+            const existing = prev.find((i)=>i.product.id === product.id);
+            if (!existing) return prev;
+            if (existing.quantity === 1) {
+                return prev.filter((i)=>i.product.id !== product.id);
+            }
+            return prev.map((i)=>i.product.id === product.id ? {
+                    ...i,
+                    quantity: i.quantity - 1
+                } : i);
+        });
+    };
+    const clearCart = ()=>{
+        setCart([]);
+    };
+    const cartTotal = cart.reduce((acc, item)=>acc + item.product.price * item.quantity, 0);
+    // Create sale action
+    const createSale = async (selectedMethod)=>{
+        setPaymentMethod(selectedMethod);
+        try {
+            let effectiveStoreId = storeId;
+            if (!effectiveStoreId) {
+                const { data: stores, error: storeError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from('stores').select('id').limit(1);
+                if (storeError) {
+                    await showError('Erro ao buscar informações da loja. Tente novamente.', 'Erro na venda');
+                    return;
+                }
+                if (stores?.[0]?.id) {
+                    effectiveStoreId = stores[0].id;
+                    setStoreId(effectiveStoreId);
+                } else {
+                    await showError('Nenhuma loja encontrada. Configure sua loja primeiro.', 'Loja não encontrada');
+                    return;
+                }
+            }
+            // Prepare items for RPC
+            const rpcItems = cart.map((item)=>({
+                    product_id: item.product.id,
+                    quantity: item.quantity,
+                    unit_price: item.product.price,
+                    total: item.product.price * item.quantity,
+                    product_name: item.product.name
+                }));
+            const dbMethod = selectedMethod === 'cash' ? 'CASH' : selectedMethod === 'pix' ? 'PIX' : 'CREDIT_CARD';
+            const { data: result, error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].rpc('create_sale_transaction', {
+                p_store_id: effectiveStoreId,
+                p_total: cartTotal,
+                p_items: rpcItems,
+                p_payment_method: dbMethod
+            });
+            if (error) {
+                await showError(`Não foi possível criar a venda. ${error.message || 'Tente novamente.'}`, 'Erro ao criar venda');
+                return;
+            }
+            const { sale_id, status } = result;
+            setCurrentSaleId(sale_id);
+            if (status === 'PAID') {
+                setView('payment-confirmation');
+            } else {
+                setView('payment-waiting');
+            }
+        } catch (error) {
+            await showError(`Erro inesperado ao processar a venda: ${error?.message || 'Tente novamente.'}`, 'Erro');
+        }
+    };
+    // Logout action
+    const logout = async ()=>{
+        await signOut();
+        clearCart();
+        setStoreId(null);
+        setPaymentMethod(null);
+        setCurrentSaleId(null);
+        setView('login');
+    };
+    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"](AppContext.Provider, {
+        value: {
+            view,
+            setView,
+            navigateToTab,
+            cart,
+            addToCart,
+            removeFromCart,
+            clearCart,
+            cartTotal,
+            paymentMethod,
+            currentSaleId,
+            setPaymentMethod,
+            setCurrentSaleId,
+            storeId,
+            createSale,
+            logout
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "<[project]/contexts/AppContext.tsx>",
+        lineNumber: 291,
+        columnNumber: 5
+    }, this);
+};
+const useApp = ()=>{
+    const context = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$future$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"](AppContext);
+    if (!context) {
+        throw new Error('useApp must be used within an AppProvider');
+    }
+    return context;
+};
+
+})()),
 "[project]/app/page.tsx [app-ssr] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__ }) => (() => {
 "use strict";
 
@@ -2922,4 +3134,4 @@ function RootApp() {
 
 };
 
-//# sourceMappingURL=_a4277d._.js.map
+//# sourceMappingURL=_03f1aa._.js.map

@@ -373,12 +373,6 @@ body {
 .right-0 {
   right: 0px;
 }
-.top-0 {
-  top: 0px;
-}
-.z-30 {
-  z-index: 30;
-}
 .z-40 {
   z-index: 40;
 }
@@ -397,9 +391,6 @@ body {
 }
 .mb-2 {
   margin-bottom: 0.5rem;
-}
-.mb-20 {
-  margin-bottom: 5rem;
 }
 .mb-3 {
   margin-bottom: 0.75rem;
@@ -424,6 +415,9 @@ body {
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mt-auto {
+  margin-top: auto;
 }
 .block {
   display: block;
@@ -476,6 +470,9 @@ body {
 .min-h-screen {
   min-height: 100vh;
 }
+.min-h-0 {
+  min-height: 0px;
+}
 .w-10 {
   width: 2.5rem;
 }
@@ -510,11 +507,11 @@ body {
 .w-px {
   width: 1px;
 }
-.min-w-\[28px\] {
-  min-width: 28px;
-}
 .min-w-0 {
   min-width: 0px;
+}
+.min-w-\[28px\] {
+  min-width: 28px;
 }
 .max-w-md {
   max-width: 28rem;
@@ -847,17 +844,14 @@ body {
 .pb-24 {
   padding-bottom: 6rem;
 }
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
 .pb-4 {
   padding-bottom: 1rem;
 }
 .pb-6 {
   padding-bottom: 1.5rem;
-}
-.pt-6 {
-  padding-top: 1.5rem;
-}
-.pb-3 {
-  padding-bottom: 0.75rem;
 }
 .pt-4 {
   padding-top: 1rem;
@@ -920,6 +914,10 @@ body {
 }
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+.text-amber-600 {
+  --tw-text-opacity: 1;
+  color: rgb(217 119 6/ var(--tw-text-opacity, 1));
 }
 .text-amber-700 {
   --tw-text-opacity: 1;
