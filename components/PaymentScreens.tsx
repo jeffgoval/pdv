@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { PageShell } from './PageShell';
 import { supabase } from '@/lib/supabase';
 import { useEffect } from 'react';
+import { useDialog } from '@/contexts/DialogContext';
 
 interface PaymentMethodScreenProps {
   total: number;
@@ -123,6 +124,8 @@ export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
   onBack,
   onPaymentConfirmed,
 }) => {
+  const { showError } = useDialog();
+
   useEffect(() => {
     if (!saleId) return;
 
@@ -148,14 +151,23 @@ export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
 
     // 2. Polling Fallback (every 3s)
     const interval = setInterval(async () => {
-      const { data } = await supabase
-        .from('payments')
-        .select('status')
-        .eq('sale_id', saleId)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('payments')
+          .select('status')
+          .eq('sale_id', saleId)
+          .single();
 
-      if (data?.status === 'PAID') {
-        onPaymentConfirmed();
+        if (error) {
+          console.error('Error polling payment status:', error);
+          return;
+        }
+
+        if (data?.status === 'PAID') {
+          onPaymentConfirmed();
+        }
+      } catch (error) {
+        console.error('Unexpected error in payment polling:', error);
       }
     }, 3000);
 
@@ -163,7 +175,7 @@ export const PaymentWaitingScreen: React.FC<PaymentWaitingScreenProps> = ({
       supabase.removeChannel(channel);
       clearInterval(interval);
     };
-  }, [saleId, onPaymentConfirmed]);
+  }, [saleId, onPaymentConfirmed, showError]);
   const formatCurrency = (value: number) =>
     value.toLocaleString('pt-BR', {
       style: 'currency',

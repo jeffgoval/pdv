@@ -43,14 +43,27 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     setLoading(true);
 
     try {
-      const { data: stores } = await supabase
+      const { data: stores, error: storeError } = await supabase
         .from('stores')
         .select('id')
         .limit(1);
+
+      if (storeError) {
+        await showError(
+          'Erro ao buscar informações da loja. Tente novamente.',
+          'Erro'
+        );
+        setLoading(false);
+        return;
+      }
+
       const storeId = stores?.[0]?.id;
 
       if (!storeId) {
-        await showError('Nenhuma loja encontrada.');
+        await showError(
+          'Nenhuma loja encontrada. Configure sua loja primeiro.',
+          'Loja não encontrada'
+        );
         setLoading(false);
         return;
       }
@@ -69,17 +82,33 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           .update(productData)
           .eq('id', product.id);
 
-        if (error) throw error;
+        if (error) {
+          await showError(
+            `Não foi possível atualizar o produto: ${error.message}`,
+            'Erro ao atualizar'
+          );
+          setLoading(false);
+          return;
+        }
       } else {
         const { error } = await supabase.from('products').insert(productData);
 
-        if (error) throw error;
+        if (error) {
+          await showError(
+            `Não foi possível criar o produto: ${error.message}`,
+            'Erro ao criar'
+          );
+          setLoading(false);
+          return;
+        }
       }
 
       onSave();
-    } catch (error) {
-      console.error('Error saving product:', error);
-      await showError('Erro ao salvar produto.');
+    } catch (error: any) {
+      await showError(
+        `Erro inesperado ao salvar produto: ${error?.message || 'Tente novamente.'}`,
+        'Erro'
+      );
     } finally {
       setLoading(false);
     }

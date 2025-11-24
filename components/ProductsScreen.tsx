@@ -108,9 +108,6 @@ export const ProductsScreen: React.FC<ProductsScreenProps> = ({
               Novo produto
             </span>
           </span>
-          <span className="text-xs text-gray-500 font-medium">
-            nome, preço, estoque
-          </span>
         </button>
 
         <div className="flex flex-col gap-3">

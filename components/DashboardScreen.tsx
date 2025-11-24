@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PageShell } from './PageShell';
 import { supabase } from '@/lib/supabase';
+import { useDialog } from '@/contexts/DialogContext';
 
 type NavTab = 'dashboard' | 'products' | 'profile';
 
@@ -20,11 +21,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   activeTab,
   onNavigate,
 }) => {
+  const { showError } = useDialog();
   const [metrics, setMetrics] = useState({
     todaySales: 0,
     todayRevenue: 0,
-    pixRevenue: 0,
-    pixCount: 0,
+    pendingSales: 0,
+    pendingRevenue: 0,
   });
 
   const [loading, setLoading] = useState(true);
@@ -43,32 +45,48 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           .gte('created_at', todayISO);
 
         if (salesError) {
-          console.error('Error fetching sales:', salesError);
+          await showError(
+            'Não foi possível carregar as métricas de vendas. Tente recarregar a página.',
+            'Erro ao carregar dados'
+          );
           return;
         }
 
         if (sales) {
-          const todaySales = sales.filter((s) => s.status === 'PAID').length;
-          const todayRevenue = sales
-            .filter((s) => s.status === 'PAID')
-            .reduce((sum, s) => sum + (s.total || 0), 0);
+          const paidSales = sales.filter((s) => s.status === 'PAID');
+          const pendingSales = sales.filter((s) => s.status === 'PENDING');
+
+          const todaySales = paidSales.length;
+          const todayRevenue = paidSales.reduce(
+            (sum, s) => sum + (s.total || 0),
+            0
+          );
+
+          const pendingSalesCount = pendingSales.length;
+          const pendingRevenue = pendingSales.reduce(
+            (sum, s) => sum + (s.total || 0),
+            0
+          );
 
           setMetrics({
             todaySales,
             todayRevenue,
-            pixRevenue: 0,
-            pixCount: 0,
+            pendingSales: pendingSalesCount,
+            pendingRevenue,
           });
         }
-      } catch (error) {
-        console.error('Error in fetchMetrics:', error);
+      } catch (error: any) {
+        await showError(
+          `Erro inesperado ao carregar métricas: ${error?.message || 'Tente novamente.'}`,
+          'Erro'
+        );
       } finally {
         setLoading(false);
       }
     };
 
     fetchMetrics();
-  }, []);
+  }, [showError]);
 
   const formatCurrency = (value: number) =>
     value.toLocaleString('pt-BR', {
@@ -114,13 +132,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             className="rounded-2xl border-2 border-gray-200 bg-white p-5 flex flex-col gap-2 shadow-sm"
           >
             <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
-              PIX recebido
+              Vendas pendentes
             </span>
             <span className="text-2xl font-bold text-gray-900">
-              {formatCurrency(metrics.pixRevenue)}
+              {formatCurrency(metrics.pendingRevenue)}
             </span>
-            <span className="text-sm text-gray-600 font-bold">
-              {metrics.pixCount} pendentes
+            <span className="text-sm text-amber-600 font-bold">
+              {metrics.pendingSales} aguardando
             </span>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageShell } from './PageShell';
 import { supabase } from '@/lib/supabase';
+import { useDialog } from '@/contexts/DialogContext';
 
 interface Product {
   id: string;
@@ -33,23 +34,41 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const { showError } = useDialog();
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('products')
-      .select('id, name, price, stock')
-      .eq('is_active', true)
-      .gt('stock', 0)
-      .order('name');
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('id, name, price, stock')
+        .eq('is_active', true)
+        .gt('stock', 0)
+        .order('name');
 
-    if (data) {
-      setProducts(data);
+      if (error) {
+        await showError(
+          'Não foi possível carregar os produtos. Verifique sua conexão.',
+          'Erro ao carregar produtos'
+        );
+        return;
+      }
+
+      if (data) {
+        setProducts(data);
+      }
+    } catch (error: any) {
+      await showError(
+        `Erro inesperado: ${error?.message || 'Tente novamente.'}`,
+        'Erro'
+      );
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const total = cart.reduce(
