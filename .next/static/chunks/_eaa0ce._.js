@@ -1,4 +1,4 @@
-(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_4670b4._.js", {
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_eaa0ce._.js", {
 
 "[project]/components/LoginScreen.tsx [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
 "use strict";
@@ -474,11 +474,17 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
     });
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"](()=>{
         const fetchMetrics = async ()=>{
-            const { data, error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from('store_analytics').select('*').maybeSingle();
-            if (data) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayISO = today.toISOString();
+            // Get today's sales
+            const { data: sales, error: salesError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from('sales').select('total, status').gte('created_at', todayISO);
+            if (sales) {
+                const todaySales = sales.filter((s)=>s.status === 'PAID').length;
+                const todayRevenue = sales.filter((s)=>s.status === 'PAID').reduce((sum, s)=>sum + (s.total || 0), 0);
                 setMetrics({
-                    todaySales: data.today_sales || 0,
-                    todayRevenue: data.today_revenue || 0,
+                    todaySales,
+                    todayRevenue,
                     pixRevenue: 0,
                     pixCount: 0
                 });
@@ -512,14 +518,14 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                 children: "＋"
                             }, void 0, false, {
                                 fileName: "<[project]/components/DashboardScreen.tsx>",
-                                lineNumber: 70,
+                                lineNumber: 80,
                                 columnNumber: 11
                             }, this),
                             "Nova venda"
                         ]
                     }, void 0, true, {
                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                        lineNumber: 64,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
@@ -534,7 +540,7 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         children: "Vendas de hoje"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 79,
+                                        lineNumber: 89,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
@@ -542,7 +548,7 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         children: formatCurrency(metrics.todayRevenue)
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 82,
+                                        lineNumber: 92,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
@@ -553,13 +559,13 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         ]
                                     }, void 0, true, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 85,
+                                        lineNumber: 95,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "<[project]/components/DashboardScreen.tsx>",
-                                lineNumber: 75,
+                                lineNumber: 85,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -571,7 +577,7 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         children: "Recebido via PIX"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 93,
+                                        lineNumber: 103,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
@@ -579,7 +585,7 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         children: formatCurrency(metrics.pixRevenue)
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 96,
+                                        lineNumber: 106,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
@@ -590,25 +596,25 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         ]
                                     }, void 0, true, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 99,
+                                        lineNumber: 109,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "<[project]/components/DashboardScreen.tsx>",
-                                lineNumber: 89,
+                                lineNumber: 99,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                        lineNumber: 74,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "<[project]/components/DashboardScreen.tsx>",
-                lineNumber: 63,
+                lineNumber: 73,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("section", {
@@ -621,12 +627,12 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                             children: "Atalhos rápidos"
                         }, void 0, false, {
                             fileName: "<[project]/components/DashboardScreen.tsx>",
-                            lineNumber: 108,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                        lineNumber: 107,
+                        lineNumber: 117,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
@@ -642,39 +648,12 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                         children: "⚡"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 118,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
-                                        className: "text-xs text-gray-700 font-bold",
-                                        children: "Nova venda"
-                                    }, void 0, false, {
-                                        fileName: "<[project]/components/DashboardScreen.tsx>",
-                                        lineNumber: 121,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "<[project]/components/DashboardScreen.tsx>",
-                                lineNumber: 113,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
-                                onClick: onGoProducts,
-                                className: "rounded-2xl border-2 border-gray-200 bg-white p-4 flex flex-col items-start gap-2 hover:border-blue-300 hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-                                "aria-label": "Ver produtos",
-                                children: [
-                                    /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
-                                        className: "rounded-full bg-gray-100 text-gray-700 text-base px-2 py-1",
-                                        children: "📦"
-                                    }, void 0, false, {
-                                        fileName: "<[project]/components/DashboardScreen.tsx>",
                                         lineNumber: 128,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
                                         className: "text-xs text-gray-700 font-bold",
-                                        children: "Produtos"
+                                        children: "Nova venda"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
                                         lineNumber: 131,
@@ -687,13 +666,13 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
-                                onClick: onGoSalesHistory,
+                                onClick: onGoProducts,
                                 className: "rounded-2xl border-2 border-gray-200 bg-white p-4 flex flex-col items-start gap-2 hover:border-blue-300 hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-                                "aria-label": "Ver histórico de vendas",
+                                "aria-label": "Ver produtos",
                                 children: [
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
                                         className: "rounded-full bg-gray-100 text-gray-700 text-base px-2 py-1",
-                                        children: "🧾"
+                                        children: "📦"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
                                         lineNumber: 138,
@@ -701,7 +680,7 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                     }, this),
                                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
                                         className: "text-xs text-gray-700 font-bold",
-                                        children: "Vendas"
+                                        children: "Produtos"
                                     }, void 0, false, {
                                         fileName: "<[project]/components/DashboardScreen.tsx>",
                                         lineNumber: 141,
@@ -712,23 +691,50 @@ const DashboardScreen = ({ onNewSale, onGoProducts, onGoSalesHistory, activeTab,
                                 fileName: "<[project]/components/DashboardScreen.tsx>",
                                 lineNumber: 133,
                                 columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
+                                onClick: onGoSalesHistory,
+                                className: "rounded-2xl border-2 border-gray-200 bg-white p-4 flex flex-col items-start gap-2 hover:border-blue-300 hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+                                "aria-label": "Ver histórico de vendas",
+                                children: [
+                                    /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
+                                        className: "rounded-full bg-gray-100 text-gray-700 text-base px-2 py-1",
+                                        children: "🧾"
+                                    }, void 0, false, {
+                                        fileName: "<[project]/components/DashboardScreen.tsx>",
+                                        lineNumber: 148,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("span", {
+                                        className: "text-xs text-gray-700 font-bold",
+                                        children: "Vendas"
+                                    }, void 0, false, {
+                                        fileName: "<[project]/components/DashboardScreen.tsx>",
+                                        lineNumber: 151,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "<[project]/components/DashboardScreen.tsx>",
+                                lineNumber: 143,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "<[project]/components/DashboardScreen.tsx>",
-                        lineNumber: 112,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "<[project]/components/DashboardScreen.tsx>",
-                lineNumber: 106,
+                lineNumber: 116,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "<[project]/components/DashboardScreen.tsx>",
-        lineNumber: 58,
+        lineNumber: 68,
         columnNumber: 5
     }, this);
 };
@@ -2386,6 +2392,26 @@ var _c;
 __turbopack_refresh__.register(_c, "SalesHistoryScreen");
 
 })()),
+"[project]/lib/translations.ts [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
+"use strict";
+
+// Role translation mapping
+__turbopack_esm__({
+    "roleTranslations": ()=>roleTranslations,
+    "translateRole": ()=>translateRole
+});
+const roleTranslations = {
+    OWNER: 'Proprietário',
+    ADMIN: 'Administrador',
+    MANAGER: 'Gerente',
+    CASHIER: 'Caixa',
+    VIEWER: 'Visualizador'
+};
+function translateRole(role) {
+    return roleTranslations[role] || role;
+}
+
+})()),
 "[project]/components/ProfileScreen.tsx [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
 "use strict";
 
@@ -3036,4 +3062,4 @@ __turbopack_refresh__.register(_c1, "RootApp");
 })()),
 }]);
 
-//# sourceMappingURL=_4670b4._.js.map
+//# sourceMappingURL=_eaa0ce._.js.map

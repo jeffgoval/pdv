@@ -29,15 +29,25 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
 
   useEffect(() => {
     const fetchMetrics = async () => {
-      const { data, error } = await supabase
-        .from('store_analytics')
-        .select('*')
-        .maybeSingle();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayISO = today.toISOString();
 
-      if (data) {
+      // Get today's sales
+      const { data: sales, error: salesError } = await supabase
+        .from('sales')
+        .select('total, status')
+        .gte('created_at', todayISO);
+
+      if (sales) {
+        const todaySales = sales.filter((s) => s.status === 'PAID').length;
+        const todayRevenue = sales
+          .filter((s) => s.status === 'PAID')
+          .reduce((sum, s) => sum + (s.total || 0), 0);
+
         setMetrics({
-          todaySales: data.today_sales || 0,
-          todayRevenue: data.today_revenue || 0,
+          todaySales,
+          todayRevenue,
           pixRevenue: 0,
           pixCount: 0,
         });

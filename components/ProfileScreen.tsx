@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PageShell } from './PageShell';
 import { supabase } from '@/lib/supabase';
 import { useDialog } from '@/contexts/DialogContext';
+import { translateRole } from '@/lib/translations';
 
 type NavTab = 'dashboard' | 'products' | 'profile';
 
@@ -56,7 +57,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               {user?.email || 'email@exemplo.com'}
             </span>
             <span className="text-xs text-blue-700 mt-1 px-2 py-0.5 rounded-full bg-blue-100 border border-blue-200 w-fit font-bold">
-              {user?.role || 'Vendedor'}
+              {translateRole(user?.role || 'VIEWER')}
             </span>
           </div>
         </div>
