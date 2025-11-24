@@ -1,4 +1,4 @@
-(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_11554e._.js", {
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/_4670b4._.js", {
 
 "[project]/components/LoginScreen.tsx [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
 "use strict";
@@ -2644,11 +2644,100 @@ var _c;
 __turbopack_refresh__.register(_c, "ProfileScreen");
 
 })()),
+"[project]/contexts/AuthContext.tsx [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
+"use strict";
+
+__turbopack_esm__({
+    "AuthProvider": ()=>AuthProvider,
+    "useAuth": ()=>useAuth
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/lib/supabase.ts [app-client] (ecmascript)");
+"__TURBOPACK__ecmascript__hoisting__location__";
+;
+var _s = __turbopack_refresh__.signature(), _s1 = __turbopack_refresh__.signature();
+;
+;
+const AuthContext = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"](undefined);
+function AuthProvider({ children }) {
+    _s();
+    const [user, setUser] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"](null);
+    const [session, setSession] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"](null);
+    const [loading, setLoading] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"](true);
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"](()=>{
+        // Get initial session
+        __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.getSession().then(({ data: { session } })=>{
+            setSession(session);
+            setUser(session?.user ?? null);
+            setLoading(false);
+        });
+        // Listen for auth changes
+        const { data: { subscription } } = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.onAuthStateChange((_event, session)=>{
+            setSession(session);
+            setUser(session?.user ?? null);
+        });
+        return ()=>subscription.unsubscribe();
+    }, []);
+    const signIn = async (email, password)=>{
+        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.signInWithPassword({
+            email,
+            password
+        });
+        if (error) throw error;
+    };
+    const signUp = async (email, password, name)=>{
+        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    name
+                }
+            }
+        });
+        if (error) throw error;
+    };
+    const signOut = async ()=>{
+        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.signOut();
+        if (error) throw error;
+    };
+    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](AuthContext.Provider, {
+        value: {
+            user,
+            session,
+            loading,
+            signIn,
+            signUp,
+            signOut
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "<[project]/contexts/AuthContext.tsx>",
+        lineNumber: 67,
+        columnNumber: 5
+    }, this);
+}
+_s(AuthProvider, "sIDOCMze9iVqwxkgWIhOu8vskSI=");
+_c = AuthProvider;
+function useAuth() {
+    _s1();
+    const context = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"](AuthContext);
+    if (context === undefined) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+}
+_s1(useAuth, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
+var _c;
+__turbopack_refresh__.register(_c, "AuthProvider");
+
+})()),
 "[project]/app/page.tsx [app-client] (ecmascript)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname, k: __turbopack_refresh__ }) => (() => {
 "use strict";
 
 __turbopack_esm__({
-    "default": ()=>__TURBOPACK__default__export__
+    "default": ()=>RootApp
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
@@ -2817,11 +2906,12 @@ const PDVRaizApp = ()=>{
         className: "w-full min-h-screen flex justify-center items-start p-4",
         children: [
             view === 'login' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$LoginScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LoginScreen"], {
-                onLogin: handleLogin
+                onLogin: handleLogin,
+                onSignUp: handleSignUp
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 228,
-                columnNumber: 28
+                lineNumber: 229,
+                columnNumber: 9
             }, this),
             view === 'dashboard' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$DashboardScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DashboardScreen"], {
                 onNewSale: ()=>{
@@ -2834,7 +2924,7 @@ const PDVRaizApp = ()=>{
                 onNavigate: handleNavigate
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 231,
+                lineNumber: 233,
                 columnNumber: 9
             }, this),
             view === 'products' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProductsScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProductsScreen"], {
@@ -2843,7 +2933,7 @@ const PDVRaizApp = ()=>{
                 onNavigate: handleNavigate
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 244,
+                lineNumber: 246,
                 columnNumber: 9
             }, this),
             view === 'new-sale' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$NewSaleScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NewSaleScreen"], {
@@ -2854,7 +2944,7 @@ const PDVRaizApp = ()=>{
                 onBack: ()=>setView('dashboard')
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 252,
+                lineNumber: 254,
                 columnNumber: 9
             }, this),
             view === 'payment-method' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$PaymentScreens$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PaymentMethodScreen"], {
@@ -2863,7 +2953,7 @@ const PDVRaizApp = ()=>{
                 onBack: ()=>setView('new-sale')
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 262,
+                lineNumber: 264,
                 columnNumber: 9
             }, this),
             view === 'payment-waiting' && method && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$PaymentScreens$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PaymentWaitingScreen"], {
@@ -2874,7 +2964,7 @@ const PDVRaizApp = ()=>{
                 onPaymentConfirmed: ()=>setView('payment-confirmation')
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 270,
+                lineNumber: 272,
                 columnNumber: 9
             }, this),
             view === 'payment-confirmation' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$PaymentScreens$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PaymentConfirmationScreen"], {
@@ -2885,7 +2975,7 @@ const PDVRaizApp = ()=>{
                 }
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 280,
+                lineNumber: 282,
                 columnNumber: 9
             }, this),
             view === 'sales-history' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$SalesHistoryScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SalesHistoryScreen"], {
@@ -2893,17 +2983,17 @@ const PDVRaizApp = ()=>{
                 onNavigate: handleNavigate
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 290,
+                lineNumber: 292,
                 columnNumber: 9
             }, this),
             view === 'profile' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProfileScreen"], {
                 onBack: ()=>setView('dashboard'),
                 activeTab: "profile",
                 onNavigate: handleNavigate,
-                onLogout: ()=>setView('login')
+                onLogout: handleLogout
             }, void 0, false, {
                 fileName: "<[project]/app/page.tsx>",
-                lineNumber: 297,
+                lineNumber: 299,
                 columnNumber: 9
             }, this)
         ]
@@ -2919,9 +3009,23 @@ _s(PDVRaizApp, "RScEMjdnh7iHsaVtH2a/n9hv0Bw=", false, function() {
     ];
 });
 _c = PDVRaizApp;
-const __TURBOPACK__default__export__ = PDVRaizApp;
-var _c;
+function RootApp() {
+    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthProvider"], {
+        children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](PDVRaizApp, {}, void 0, false, {
+            fileName: "<[project]/app/page.tsx>",
+            lineNumber: 313,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "<[project]/app/page.tsx>",
+        lineNumber: 312,
+        columnNumber: 5
+    }, this);
+}
+_c1 = RootApp;
+var _c, _c1;
 __turbopack_refresh__.register(_c, "PDVRaizApp");
+__turbopack_refresh__.register(_c1, "RootApp");
 
 })()),
 "[project]/app/page.tsx [app-rsc] (ecmascript, Next.js server component, client modules)": (({ r: __turbopack_require__, f: __turbopack_require_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, l: __turbopack_load__, j: __turbopack_dynamic__, p: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, g: global, __dirname }) => (() => {
@@ -2930,4 +3034,4 @@ __turbopack_refresh__.register(_c, "PDVRaizApp");
 })()),
 }]);
 
-//# sourceMappingURL=_11554e._.js.map
+//# sourceMappingURL=_4670b4._.js.map

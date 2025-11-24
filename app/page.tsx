@@ -13,6 +13,7 @@ import {
 import { SalesHistoryScreen } from '@/components/SalesHistoryScreen';
 import { ProfileScreen } from '@/components/ProfileScreen';
 import { supabase } from '@/lib/supabase';
+import { useAuth, AuthProvider } from '@/contexts/AuthContext';
 
 // ------------------------------------------------------
 // Types
@@ -48,49 +49,34 @@ type CartItem = {
 // ------------------------------------------------------
 
 const PDVRaizApp: React.FC = () => {
+  const { user, signIn, signUp, signOut } = useAuth();
   const [view, setView] = useState<ViewId>('login');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [method, setMethod] = useState<'pix' | 'link' | 'cash' | null>(null);
   const [currentSaleId, setCurrentSaleId] = useState<string | null>(null);
   const [storeId, setStoreId] = useState<string | null>(null);
 
-  // Auto-create store on mount if needed and cache ID
+  // Load user's store when authenticated
   useEffect(() => {
-    const ensureStore = async () => {
+    const loadUserStore = async () => {
+      if (!user) {
+        setStoreId(null);
+        setView('login');
+        return;
+      }
+
+      // Get or create store for this user
       const { data: stores } = await supabase
         .from('stores')
         .select('id')
+        .eq('user_id', user.id)
         .limit(1);
 
       if (stores && stores.length > 0) {
         setStoreId(stores[0].id);
+        setView('dashboard');
       } else {
-        console.log('No store found. Creating default store...');
-        // Logic to create store is in handleLogin, maybe move here or keep simple
-      }
-    };
-    ensureStore();
-  }, []);
-
-  const handleLogin = async () => {
-    // Check if store exists, if not create one
-    const { data: stores } = await supabase
-      .from('stores')
-      .select('id')
-      .limit(1);
-
-    if (!stores || stores.length === 0) {
-      const { data: user } = await supabase
-        .from('users')
-        .insert({
-          name: 'Demo User',
-          email: 'demo@pdvraiz.com',
-          role: 'OWNER',
-        })
-        .select()
-        .single();
-
-      if (user) {
+        // Create store for new user
         const { data: newStore } = await supabase
           .from('stores')
           .insert({
@@ -102,12 +88,33 @@ const PDVRaizApp: React.FC = () => {
           .select()
           .single();
 
-        if (newStore) setStoreId(newStore.id);
+        if (newStore) {
+          setStoreId(newStore.id);
+          setView('dashboard');
+        }
       }
-    } else {
-      setStoreId(stores[0].id);
-    }
-    setView('dashboard');
+    };
+
+    loadUserStore();
+  }, [user]);
+
+  const handleLogin = async (email: string, password: string) => {
+    await signIn(email, password);
+  };
+
+  const handleSignUp = async (
+    email: string,
+    password: string,
+    name: string
+  ) => {
+    await signUp(email, password, name);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    setCart([]);
+    setStoreId(null);
+    setView('login');
   };
 
   const handleNavigate = (tab: NavTab) => {
@@ -218,7 +225,9 @@ const PDVRaizApp: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-start p-4">
-      {view === 'login' && <LoginScreen onLogin={handleLogin} />}
+      {view === 'login' && (
+        <LoginScreen onLogin={handleLogin} onSignUp={handleSignUp} />
+      )}
 
       {view === 'dashboard' && (
         <DashboardScreen
@@ -291,11 +300,17 @@ const PDVRaizApp: React.FC = () => {
           onBack={() => setView('dashboard')}
           activeTab="profile"
           onNavigate={handleNavigate}
-          onLogout={() => setView('login')}
+          onLogout={handleLogout}
         />
       )}
     </div>
   );
 };
 
-export default PDVRaizApp;
+export default function RootApp() {
+  return (
+    <AuthProvider>
+      <PDVRaizApp />
+    </AuthProvider>
+  );
+}
