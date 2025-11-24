@@ -114,7 +114,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             className="rounded-2xl border-2 border-gray-200 bg-white p-5 flex flex-col gap-2 shadow-sm"
           >
             <span className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
-              Recebido via PIX
+              PIX recebido
             </span>
             <span className="text-2xl font-bold text-gray-900">
               {formatCurrency(metrics.pixRevenue)}
