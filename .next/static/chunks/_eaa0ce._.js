@@ -367,14 +367,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$BottomNav$2e$t
 ;
 const PageShell = ({ title, children, onBack, activeTab, onNavigate })=>{
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-        className: "min-h-screen bg-white text-gray-900 flex flex-col w-full max-w-md relative border-2 border-gray-200 shadow-xl rounded-2xl overflow-hidden",
+        className: "h-screen bg-white text-gray-900 flex flex-col w-full max-w-md border-x-2 border-gray-200 shadow-xl",
         children: [
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("header", {
-                className: "flex items-center gap-4 px-6 pt-6 pb-4 border-b-2 border-gray-200 bg-white sticky top-0 z-30",
+                className: "flex items-center gap-4 px-4 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4 border-b-2 border-gray-200 bg-white shrink-0",
                 children: [
                     onBack && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("button", {
                         onClick: onBack,
-                        className: "rounded-full border-2 border-gray-400 w-9 h-9 flex items-center justify-center text-sm hover:bg-gray-100 transition-colors text-gray-800 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+                        className: "rounded-full border-2 border-gray-400 w-9 h-9 flex items-center justify-center text-sm hover:bg-gray-100 transition-colors text-gray-800 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shrink-0",
                         "aria-label": "Voltar",
                         children: "←"
                     }, void 0, false, {
@@ -383,9 +383,9 @@ const PageShell = ({ title, children, onBack, activeTab, onNavigate })=>{
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-                        className: "flex flex-col",
+                        className: "flex flex-col min-w-0",
                         children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("h1", {
-                            className: "text-xl font-bold text-gray-900",
+                            className: "text-lg sm:text-xl font-bold text-gray-900 truncate",
                             children: title
                         }, void 0, false, {
                             fileName: "<[project]/components/PageShell.tsx>",
@@ -404,11 +404,11 @@ const PageShell = ({ title, children, onBack, activeTab, onNavigate })=>{
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("main", {
-                className: `flex-1 px-6 pb-6 pt-6 flex flex-col gap-6 overflow-y-auto bg-gray-50 ${activeTab ? 'mb-20' : ''}`,
+                className: `flex-1 px-4 sm:px-6 pb-4 sm:pb-6 pt-4 sm:pt-6 flex flex-col gap-4 sm:gap-6 overflow-y-auto bg-gray-50 ${activeTab ? 'pb-24' : ''}`,
                 children: children
             }, void 0, false, {
                 fileName: "<[project]/components/PageShell.tsx>",
-                lineNumber: 37,
+                lineNumber: 39,
                 columnNumber: 7
             }, this),
             activeTab && onNavigate && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$BottomNav$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BottomNav"], {
@@ -416,7 +416,7 @@ const PageShell = ({ title, children, onBack, activeTab, onNavigate })=>{
                 onNavigate: onNavigate
             }, void 0, false, {
                 fileName: "<[project]/components/PageShell.tsx>",
-                lineNumber: 43,
+                lineNumber: 45,
                 columnNumber: 9
             }, this)
         ]
@@ -1327,7 +1327,7 @@ const NewSaleScreen = ({ cart, onAdd, onRemove, onFinalize, onBack })=>{
         onBack: onBack,
         children: [
             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-                className: "flex flex-col gap-4 pb-24",
+                className: "flex flex-col gap-4 relative flex-1",
                 children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                     className: "rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden",
                     children: loading ? /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
@@ -1501,7 +1501,7 @@ const NewSaleScreen = ({ cart, onAdd, onRemove, onFinalize, onBack })=>{
                         stiffness: 380,
                         damping: 32
                     },
-                    className: "fixed inset-x-0 bottom-0 px-4 pb-4 max-w-md mx-auto",
+                    className: "absolute inset-x-0 bottom-0 px-4 pb-4",
                     children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
                         className: "rounded-2xl border-2 border-blue-200 bg-white backdrop-blur shadow-lg px-5 py-4 flex items-center justify-between",
                         children: [
@@ -2931,7 +2931,7 @@ const PDVRaizApp = ()=>{
         }
     };
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"]("div", {
-        className: "w-full min-h-screen flex justify-center items-start p-4",
+        className: "w-full h-screen flex justify-center items-center bg-gray-100 overflow-hidden",
         children: [
             view === 'login' && /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"](__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$LoginScreen$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LoginScreen"], {
                 onLogin: handleLogin,

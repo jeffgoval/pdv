@@ -224,7 +224,7 @@ const PDVRaizApp: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-start p-4">
+    <div className="w-full h-screen flex justify-center items-center bg-gray-100 overflow-hidden">
       {view === 'login' && (
         <LoginScreen onLogin={handleLogin} onSignUp={handleSignUp} />
       )}

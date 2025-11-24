@@ -66,7 +66,7 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
 
   return (
     <PageShell title="Nova venda" onBack={onBack}>
-      <div className="flex flex-col gap-4 pb-24">
+      <div className="flex flex-col gap-4 relative flex-1">
         <div className="rounded-2xl border-2 border-gray-200 bg-white divide-y-2 divide-gray-100 shadow-sm overflow-hidden">
           {loading ? (
             <div className="p-8 text-center">
@@ -141,7 +141,7 @@ export const NewSaleScreen: React.FC<NewSaleScreenProps> = ({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 60, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-            className="fixed inset-x-0 bottom-0 px-4 pb-4 max-w-md mx-auto"
+            className="absolute inset-x-0 bottom-0 px-4 pb-4"
           >
             <div className="rounded-2xl border-2 border-blue-200 bg-white backdrop-blur shadow-lg px-5 py-4 flex items-center justify-between">
               <div className="flex flex-col gap-1">
